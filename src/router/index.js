@@ -5,20 +5,48 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
-    path: '/first',
-    name: 'first',
-    component: () => import('../views/threejs/first.vue')
+    component: HomeView,
+    children: [
+      {
+        path: '/three',
+        name: 'index',
+        component: () => import('@/views/threejs/index.vue'),
+        children: [
+          {
+            path: '/three/01',
+            name: '01index',
+            component: () => import('@/views/threejs/01/index.vue'),
+            children: [
+                {
+                  path: '/three/01/demo',
+                  name: '01demo',
+                  component: () => import('@/views/threejs/01/demo.vue')
+                },
+                {
+                  path: '/three/01/MeshLamberMaterial',
+                  name: 'MeshLamberMaterial',
+                  component: () => import('@/views/threejs/01/MeshLamberMaterial.vue')
+                },
+                {
+                  path: '/three/01/MeshPhongMaterial',
+                  name: 'MeshPhongMaterial',
+                  component: () => import('@/views/threejs/01/MeshPhongMaterial.vue')
+                },
+                {
+                  path: '/three/01/Geometry',
+                  name: 'Geometry',
+                  component: () => import('@/views/threejs/01/Geometry.vue')
+                },
+              {
+                  path: '/three/01/WebGLAttr',
+                  name: 'WebGLAttr',
+                  component: () => import('@/views/threejs/01/WebGLAttr.vue')
+                }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
 
